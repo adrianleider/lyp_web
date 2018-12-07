@@ -1,0 +1,75 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jc="http://jcoe.ford.com/jsfcore"
+	xmlns:ui="http://java.sun.com/jsf/facelets"	>
+
+
+	
+
+<h:form id="menuform"> 
+
+
+<p:menubar style="background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));">
+
+<p:submenu label="Seguridad">
+
+<p:menuitem value="Usuarios" />
+<p:menuitem value="Aplicaciones" />
+<p:menuitem value="Grupos" />
+<p:menuitem value="Grupos/Aplicaciones" />
+<p:menuitem value="Cambiar Contraseña" />
+
+</p:submenu>
+<p:submenu label="Ventas" >
+	
+	<p:menuitem value="Certificados" />
+	<p:menuitem value="Puntos de Venta" />
+	<p:menuitem value="Factura de Venta" outcome="facturaventa_cabecera.faces" />
+
+</p:submenu>
+<p:submenu label="Compras" >
+			
+			<p:menuitem value="Factura de Compra" />
+
+</p:submenu>
+<p:submenu label="Clientes" >
+		
+		<p:menuitem value="Clientes" />
+		<p:menuitem value="Cuenta Corriente" />	
+
+</p:submenu>
+<p:submenu label="Proveedores" >
+
+	<p:menuitem value="Proveedores" />
+		<p:menuitem value="Cuenta Corriente" />	
+
+</p:submenu>
+<p:submenu label="Articulos" >
+
+<p:menuitem value="Marcas" />
+<p:menuitem value="Rubros" />	
+<p:menuitem value="Subrubros" />
+<p:menuitem value="Articulos" />
+<p:menuitem value="Stock" />
+
+</p:submenu>
+<p:submenu label="Caja" >
+
+<p:menuitem value="Cajas" />
+<p:menuitem value="Apertura" />
+<p:menuitem value="Cierre" />
+
+</p:submenu>
+
+<p:menuitem value="Salir" action="#{loginBean.logout}"/>
+
+
+</p:menubar>
+ 
+</h:form>
+	
+	
+</ui:composition>

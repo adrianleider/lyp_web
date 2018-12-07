@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+	
+<h:head>
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	
+<link href="css/templatelyp.css" rel="stylesheet" type="text/css" />
+	
+	
+	<title><ui:insert name="titulo_pantalla" /></title>
+	
+</h:head>
+	
+<body>
+	
+	<div class="ui-g" >
+		<div class="ui-g-12" style="background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));">	
+			<div style="float:left;"><p>Sistemas de Gestion de Ventas</p></div>
+			<div style="float:right;"><p>Usuario: #{loginBean.usuario}</p></div>
+    	</div>	
+    	<div class="ui-g-12">
+    		<ui:include src="menu.xhtml" />
+  			<ui:insert name="content" />
+    	</div>
+    	<div class="ui-g-12" style="background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));">
+    		<p>Power by LYP</p>
+    	</div>
+  	</div>
+  
+</body>
+	
+	
+</html>	
