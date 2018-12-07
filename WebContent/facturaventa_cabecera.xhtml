@@ -1,0 +1,367 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jc="http://jcoe.ford.com/jsfcore"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/templatelyp.xhtml">
+
+	<ui:define name="titulo_pantalla">#{facturaVentaBean.titulo_pantalla}</ui:define>
+	<ui:define name="content">
+
+		
+		<h:form id="facturaventaform">
+			<p:messages id="messages" showDetail="true" closable="true" />
+
+			<h:panelGrid columns="1" style="margin-bottom:10px;margin-top:30px"
+				cellpadding="5">
+
+				<p:fieldset legend="Datos Factura" style="margin-bottom:20px">
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="icuit_vendedor">CUIT Vendedor</p:outputLabel>
+								<p:selectOneMenu id="icuit_vendedor" 
+									value="#{facturaVentaBean.factura.cuit_vendedor}" >
+									
+									<f:selectItem itemLabel="Seleccionar" itemValue=" " />
+									<f:selectItems value="#{facturaVentaBean.cuit_vendedores}" var="reg" itemLabel="#{reg.cuit}" itemValue="#{reg.cuit}" />
+									<p:ajax event="change" update="icond_iva_vendedor" listener="#{facturaVentaBean.cargarCondIvaVendedor}" />
+								</p:selectOneMenu>	
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="icond_iva_vendedor">Condicion IVA Vendedor</p:outputLabel>
+								
+									
+									<p:selectOneMenu id="icond_iva_vendedor"
+									value="#{facturaVentaBean.factura.cond_iva_vendedor}">
+									<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+									<f:selectItem itemLabel="IVA Resp. Inscripto" itemValue="1" />
+									<f:selectItem itemLabel="IVA Resp, No Inscripto" itemValue="2" />
+									<f:selectItem itemLabel="IVA No Responsable" itemValue="3" />
+									<f:selectItem itemLabel="IVA Sujeto Exento" itemValue="4" />
+									
+									<f:selectItem itemLabel="Responsable Monotributo" itemValue="6" />
+								</p:selectOneMenu>
+									
+									
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="itipo_comprobante">Tipo Comprobante</p:outputLabel>
+								<p:selectOneMenu id="itipo_comprobante"
+									value="#{facturaVentaBean.factura.tipo_comprobante}">
+									<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+									<f:selectItem itemLabel="Factura A" itemValue="1" />
+									<f:selectItem itemLabel="Factura B" itemValue="6" />
+									<f:selectItem itemLabel="Factura C" itemValue="11" />
+									<f:selectItem itemLabel="Nota Credito A" itemValue="3" />
+									<f:selectItem itemLabel="Nota Credito B" itemValue="8" />
+									<f:selectItem itemLabel="Nota Credito C" itemValue="13" />
+									<f:selectItem itemLabel="Nota Debito A" itemValue="2" />
+									<f:selectItem itemLabel="Nota Debito B" itemValue="7" />
+									<f:selectItem itemLabel="Nota Debito C" itemValue="12" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-4">
+							<p:outputLabel for="ipunto_venta">Punto Venta</p:outputLabel>
+							<p:inputText id="ipunto_venta" placeholder="Punto de Venta"
+								value="#{facturaVentaBean.factura.punto_venta}" />
+							<div class="ui-inputgroup"></div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="inumero_factura">Numero Factura</p:outputLabel>
+								<p:inputText id="inumero_factura"
+									placeholder="Numero de Factura"
+									value="#{facturaVentaBean.factura.numero_factura}"/>
+								
+
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="ifecha_factura">Fecha Factura</p:outputLabel>
+								<p:calendar id="ifecha_factura" placeholder="Fecha Factura"
+									value="#{facturaVentaBean.factura.fecha_factura}" pattern="yyyyMMdd"  required="true" requiredMessage="Fecha de Factura Requerido"/>
+
+							</div>
+						</div>
+
+
+					</div>
+					<div class="ui-g ui-fluid">
+
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="iconcepto">Concepto</p:outputLabel>
+								<p:selectOneMenu id="iconcepto"
+									value="#{facturaVentaBean.factura.concepto}">
+									<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+									<f:selectItem itemLabel="Producto" itemValue="1" />
+									<f:selectItem itemLabel="Servicio" itemValue="2" />
+									<f:selectItem itemLabel="Producto y Servicio" itemValue="3" />
+								</p:selectOneMenu>
+
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-6">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="imodopago">Modo de Pago</p:outputLabel>
+								<p:selectOneRadio id="imodopago"
+									value="#{facturaVentaBean.factura.modo_pago}">
+									<f:selectItem itemLabel="Contado" itemValue="1" />
+									<f:selectItem itemLabel="Tarjeta Debito" itemValue="2" />
+									<f:selectItem itemLabel="Tarjeta Credito" itemValue="3" />
+									<f:selectItem itemLabel="Cuenta Corriente" itemValue="4" />
+									<f:selectItem itemLabel="Cheque" itemValue="5" />
+								</p:selectOneRadio>
+							</div>
+						</div>
+
+					</div>
+
+				</p:fieldset>
+				<p:fieldset legend="Datos Comprador" style="margin-bottom:20px">
+
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="itipodocumento">Tipo Documento</p:outputLabel>
+
+								<p:selectOneMenu id="itipodocumento"
+									value="#{facturaVentaBean.factura.tipo_doc_comprador}">
+									<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+									<f:selectItem itemLabel="CUIT" itemValue="80" />
+									<f:selectItem itemLabel="DNI" itemValue="96" />
+									<f:selectItem itemLabel="Pasaporte" itemValue="94" />
+									<f:selectItem itemLabel="CUIL" itemValue="86" />
+								</p:selectOneMenu>
+
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="inumeroDocumento">Numero de Documento</p:outputLabel>
+								<p:inputText id="inumeroDocumento"
+									placeholder="Numero de Documento"
+									value="#{facturaVentaBean.factura.cuit_comprador}"  required="true" requiredMessage="Numero de Documento Requerido"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="icond_iva_vendedor">Condicion IVA Comprador</p:outputLabel>
+								
+									
+									<p:selectOneMenu id="icond_iva_comprador"
+									value="#{facturaVentaBean.factura.cond_iva_comprador}">
+									<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+									<f:selectItem itemLabel="IVA Resp. Inscripto" itemValue="1" />
+									<f:selectItem itemLabel="IVA Resp, No Inscripto" itemValue="2" />
+									<f:selectItem itemLabel="IVA No Responsable" itemValue="3" />
+									<f:selectItem itemLabel="IVA Sujeto Exento" itemValue="4" />
+									<f:selectItem itemLabel="Consumidor Final" itemValue="5" />
+									<f:selectItem itemLabel="Responsable Monotributo" itemValue="6" />
+								</p:selectOneMenu>
+									
+									
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-6">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="inombreCliente">Nombre de Cliente</p:outputLabel>
+								<p:inputText id="inombreCliente" placeholder="Nombre de Cliente"
+									value="#{facturaVentaBean.factura.nombre_cliente}" required="true" requiredMessage="Nombre de Cliente Requerido"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-6">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="idirCliente">Direccion de Cliente</p:outputLabel>
+								<p:inputText id="idirCliente" placeholder="Direccion de Cliente"
+									value="#{facturaVentaBean.factura.domicilio_cliente}" required="true" requiredMessage="Direccion de Cliente Requerido"/>
+							</div>
+						</div>
+						
+
+					</div>
+
+
+
+				</p:fieldset>
+				<p:fieldset legend="Datos Servicios" style="margin-bottom:20px">
+
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="ifecha_factura_desde">Fecha Servicio Desde</p:outputLabel>
+								<p:calendar id="ifecha_factura_desde"
+									placeholder="Fecha Servicio Desde"
+									value="#{facturaVentaBean.factura.fecha_serv_desde}" pattern="yyyyMMdd"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="ifecha_factura_hasta">Fecha Servicio Hasta</p:outputLabel>
+								<p:calendar id="ifecha_factura_hasta"
+									placeholder="Fecha Servicio Hasta"
+									value="#{facturaVentaBean.factura.fecha_serv_hasta}" pattern="yyyyMMdd"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="ifecha_factura_vto">Fecha Vencimiento Pago</p:outputLabel>
+								<p:calendar id="ifecha_factura_vto"
+									placeholder="Fecha Vencimiento Pago"
+									value="#{facturaVentaBean.factura.fecha_vto_pago}" pattern="yyyyMMdd"/>
+							</div>
+						</div>
+					</div>
+
+
+				</p:fieldset>
+				<p:fieldset legend="Importes" style="margin-bottom:20px">
+
+
+					<div class="ui-g ui-fluid">
+
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+								<p:outputLabel for="iiva105">IVA 10.5</p:outputLabel>
+								<p:inputNumber id="iiva105" placeholder="IVA 10.5"
+									value="#{facturaVentaBean.factura.importe_iva105}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="iiva21">IVA 21</p:outputLabel>
+								<p:inputNumber id="iiva21" placeholder="IVA 21"
+									value="#{facturaVentaBean.factura.importe_iva21}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="iiva27">IVA 27</p:outputLabel>
+								<p:inputNumber id="iiva27" placeholder="IVA 27"
+									value="#{facturaVentaBean.factura.importe_iva27}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="iivatotal">Total IVA</p:outputLabel>
+								<p:inputNumber id="iivatotal" placeholder="IVA Total"
+									value="#{facturaVentaBean.factura.importe_iva}" disabled="true"/>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="ipiibb">Porcentaje IIBB</p:outputLabel>
+								<p:inputNumber id="ipiibb" placeholder="Porcentaje IIBB"
+									value="#{facturaVentaBean.factura.porcentaje_iibb}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="iipiibb">Importe IIBB</p:outputLabel>
+								<p:inputNumber id="iipiibb" placeholder="Importe IIBB"
+									value="#{facturaVentaBean.factura.importe_iibb}" disabled="true"/>
+							</div>
+						</div>
+					</div>
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="ling">Importe No Gravado</p:outputLabel>
+								<p:inputNumber id="ling" placeholder="Importe No Gravado"
+									value="#{facturaVentaBean.factura.importe_no_gravado}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="lig">Importe Gravado</p:outputLabel>
+								<p:inputNumber id="lig" placeholder="Importe Gravado"
+									value="#{facturaVentaBean.factura.importe_gravado}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="lie">Importe Exento</p:outputLabel>
+								<p:inputNumber id="lie" placeholder="Importe Exento"
+									value="#{facturaVentaBean.factura.importe_exento}" disabled="true"/>
+							</div>
+						</div>
+						<div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+
+								<p:outputLabel for="lit">Importe Total</p:outputLabel>
+								<p:inputNumber id="lit" placeholder="Importe Total"
+									value="#{facturaVentaBean.factura.importe_total}" disabled="true"/>
+							</div>
+
+						</div>
+					</div>
+
+
+
+				</p:fieldset>
+				<p:fieldset legend="Datos Afip" style="margin-bottom:20px">
+				
+					<div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-3">
+							<div class="ui-inputgroup">
+							 <p:outputLabel for="ifecha_venc">Fecha Vencimiento CAE</p:outputLabel>
+              <p:inputText id="ifecha_venc" placeholder="Fecha Vencimiento CAE" value="#{facturaVentaBean.factura.fecha_vto_cae}" disabled="true"/>
+            </div>
+            </div>
+             <div class="ui-g-12 ui-md-4">
+							<div class="ui-inputgroup">
+              <p:outputLabel for="icae">Codigo de Autorizacion Electronico</p:outputLabel>
+              <p:inputText id="icae" placeholder="Codigo de Autorizacion Electronico" value="#{facturaVentaBean.factura.cae}" disabled="true"/>
+            </div>
+            </div>
+				</div>
+				
+				</p:fieldset>
+				<p:fieldset legend="Acciones" style="margin-bottom:20px">
+
+					<p:commandButton value="Guardar" id="ajax1" update="messages"
+						action="#{facturaVentaBean.guardar}"
+						style="margin-right:20px;float:right;height:30px;width:100px"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Imprimir" id="ajax2" update="messages"
+						action="#{facturaVentaBean.imprimir}"
+						style="margin-right:20px;float:right;height:30px;width:100px"
+						styleClass="ui-priority-secondary" />
+					<p:commandButton value="Generar CAE" id="ajax3" update="messages"
+						action="#{facturaVentaBean.generarCAE}"
+						style="margin-right:20px;float:right;height:30px;width:150px"
+						styleClass="ui-priority-secondary" />
+
+				</p:fieldset>
+
+			</h:panelGrid>
+
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

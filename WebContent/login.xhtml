@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/templatelyp.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+<body>
+
+	<h:form>
+	 <p:messages id="messages" showDetail="true" closable="true"/>
+
+		
+	<div class="row">
+  <div class="col-md-4"><br/><br/><br/><br/><br/></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+</div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));" >
+        <h3 class="panel-title">Ingreso</h3>
+      </div>	
+     <div class="panel-body"> 
+   
+    
+  
+      		<fieldset  class="form-group">
+            <label for="usuario">Usuario</label>
+            
+    <p:inputText value="#{loginBean.usuario}" class="form-control mr-sm-2 mb-2 mb-sm-0" placeholder="su usuario" />
+   
+   			 </fieldset>
+   			 
+    <fieldset  class="form-group">
+            <label for="password">Password</label>
+            
+    <p:password value="#{loginBean.password}"  class="form-control mr-sm-2 mb-2 mb-sm-0" placeholder="su password"/>
+   
+     </fieldset>
+    
+<fieldset  class="form-group">
+     <p:commandButton  value="Ingresar" id="ajax" update="messages" action="#{loginBean.ingresar}" style="margin-right:20px;background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));float:right;height:30px;width:100px" styleClass="ui-priority-primary" />
+     </fieldset>
+      </div>
+      <div class="panel-footer" style="background-image: linear-gradient(to bottom right,rgb(189,231,189), rgb(114,159,114));">Power by LYP</div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+</div>
+    
+
+
+
+
+	</h:form>
+</body>
+</html>
